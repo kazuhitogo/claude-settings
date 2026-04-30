@@ -66,4 +66,5 @@ rm ~/.claude/scripts/deny-check.sh ~/.claude/scripts/complete_sound.py
 
 ## 参考
 
+- https://github.com/InterfaceX-co-jp/genshijin/
 - https://wasabeef.jp/blog/claude-code-secure-bash
