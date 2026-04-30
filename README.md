@@ -9,12 +9,12 @@ claude-settings/
 ├── CLAUDE.md                    # グローバル指示 (原始人モード)
 ├── settings.json                # パーミッション・hooks・モデル設定
 ├── scripts/
-│   └── deny-check.sh            # PreToolUse hook: コマンド拒否チェック
-└── completion-sound/
-    └── complete_sound.py        # Stop hook: タスク完了時 和音再生
+│   ├── deny-check.sh            # PreToolUse hook: コマンド拒否チェック
+│   └── complete_sound.py        # Stop hook: タスク完了時 和音再生
+└── install.sh
 ```
 
-### settings.json の内容
+## settings.json
 
 **deny (自動拒否コマンド):**
 - `git config *`
@@ -31,35 +31,23 @@ claude-settings/
 - `skipDangerousModePermissionPrompt: true`
 - デフォルトモデル: `sonnet`
 
-### CLAUDE.md
+## CLAUDE.md
 
 原始人モード: 敬語・クッション語・冗長表現を削除し、技術的中身を維持したまま簡潔に応答する。
-
-### genshijin スキル
-
-[InterfaceX-co-jp/genshijin](https://github.com/InterfaceX-co-jp/genshijin) から取得。  
-`/genshijin` または「原始人モード」「短く」で起動。
 
 ## インストール
 
 ```bash
-git clone <this-repo> ~/Desktop/code/claude-settings
+git clone https://github.com/kazuhitogo/claude-settings ~/Desktop/code/claude-settings
 cd ~/Desktop/code/claude-settings
 ./install.sh
 ```
 
-### 前提条件
-
-| ツール | 用途 | インストール |
-|--------|------|-------------|
-| `uv` | 完了音スクリプト実行 | `curl -LsSf https://astral.sh/uv/install.sh \| sh` |
-| `curl` | genshijin スキル取得 | macOS 標準搭載 |
-| `jq` | deny-check.sh の JSON解析 | `brew install jq` |
-| `afplay` | 完了音再生 (macOS) | macOS 標準搭載 |
-
-### Linux / WSL
-
-完了音は `aplay` / `paplay` / `ffplay` にフォールバック。
+**前提条件:**
+- `uv` — 完了音スクリプト実行: `curl -LsSf https://astral.sh/uv/install.sh | sh`
+- `jq` — deny-check.sh の JSON解析: `brew install jq`
+- `afplay` — 完了音再生 (macOS 標準搭載)
+- Linux/WSL: `aplay` / `paplay` / `ffplay` にフォールバック
 
 ## アップデート
 
@@ -72,10 +60,10 @@ git pull
 ## 手動で元に戻す
 
 ```bash
-rm ~/.claude/CLAUDE.md ~/.claude/settings.json ~/.claude/scripts/deny-check.sh
-rm -rf ~/.claude/skills/genshijin ~/completion-sound
+rm ~/.claude/CLAUDE.md ~/.claude/settings.json
+rm ~/.claude/scripts/deny-check.sh ~/.claude/scripts/complete_sound.py
 ```
 
 ## 参考
-* https://github.com/InterfaceX-co-jp/genshijin/
-* https://wasabeef.jp/blog/claude-code-secure-bash
+
+- https://wasabeef.jp/blog/claude-code-secure-bash
